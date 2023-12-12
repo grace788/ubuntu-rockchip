@@ -15,7 +15,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
-        run: gh release create --draft v1.31 --title v1.31
+        run: gh release create --draft v1.31m --title v1.31m
 
   build:
     permissions:
@@ -25,20 +25,8 @@ jobs:
     strategy:
       matrix:
         platform:
-          - orangepi-5
-          - orangepi-5b
           - orangepi-5-plus
-          - rock-5b
-          - rock-5a
-          - radxa-cm5-io
           - nanopc-t6
-          - nanopi-r6c
-          - nanopi-r6s
-          - indiedroid-nova
-          - mixtile-blade3
-          - lubancat-4
-          - turing-rk1
-          - roc-rk3588s-pc
 
     steps:
       - name: Get more disk space
@@ -77,7 +65,7 @@ jobs:
       - name: Upload release assets
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release upload v1.31 ./images/ubuntu-*-preinstalled-*-arm64-${{ matrix.platform }}.*
+        run: gh release upload v1.31m ./images/ubuntu-*-preinstalled-*-arm64-${{ matrix.platform }}.*
 
       - name: Clean cache
         shell: bash
