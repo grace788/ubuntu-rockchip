@@ -15,7 +15,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
-        run: gh release create --draft v1.31m1 --title v1.31m1
+        run: gh release create --draft v1.31m2 --title v1.31m2
 
   build:
     permissions:
@@ -25,7 +25,6 @@ jobs:
     strategy:
       matrix:
         platform:
-          - orangepi-5-plus
           - nanopc-t6
 
     steps:
@@ -58,6 +57,10 @@ jobs:
           python-is-python3 fdisk bc debhelper python3-pyelftools python3-setuptools \
           python3-distutils python3-pkg-resources swig libfdt-dev libpython3-dev
 
+      - name: cat build-kernel.sh
+        shell: bash
+        run: cat ./scripts/build-kernel.sh      
+
       - name: Build image
         shell: bash
         run: sudo ./build.sh -b ${{ matrix.platform }} --launchpad
@@ -65,7 +68,7 @@ jobs:
       - name: Upload release assets
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release upload v1.31m1 ./images/ubuntu-*-preinstalled-*-arm64-${{ matrix.platform }}.*
+        run: gh release upload v1.31m2 ./images/ubuntu-*-preinstalled-*-arm64-${{ matrix.platform }}.*
 
       - name: Clean cache
         shell: bash
