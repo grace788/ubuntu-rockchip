@@ -14,6 +14,9 @@ mkdir -p build && cd build
 if [[ "${MAINLINE}" != "Y" ]]; then
     test -d linux-rockchip || git clone --single-branch --progress -b linux-5.10-gen-rkr6 https://github.com/grace788/linux-rockchip.git linux-rockchip
     cd linux-rockchip
+    echo 'use grace788/linux-rockchip'
+    git status
+    cat .git/config
 
     # Compile kernel into a deb package
     dpkg-buildpackage -a "$(cat debian/arch)" -d -b -nc -uc
