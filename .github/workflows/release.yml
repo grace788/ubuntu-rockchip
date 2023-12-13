@@ -15,7 +15,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
-        run: gh release create --draft v1.31m2 --title v1.31m2
+        run: gh release create --draft v1.31m3 --title v1.31m3
 
   build:
     permissions:
@@ -63,13 +63,17 @@ jobs:
 
       - name: Build image
         shell: bash
-        run: sudo ./build.sh -b ${{ matrix.platform }} --launchpad
+        run: sudo ./build.sh -b ${{ matrix.platform }}
 
       - name: Upload release assets
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release upload v1.31m2 ./images/ubuntu-*-preinstalled-*-arm64-${{ matrix.platform }}.*
+        run: gh release upload v1.31m3 ./images/ubuntu-*-preinstalled-*-arm64-${{ matrix.platform }}.*
 
+      - name: show linux kernel git url
+        shell: bash
+        run: cat ./build/linux-rockchip/.git/config
+        
       - name: Clean cache
         shell: bash
         run: sync && sudo rm -rf ./images/ ./build/ && sync
