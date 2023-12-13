@@ -227,7 +227,7 @@ cp ${overlay_dir}/etc/initramfs-tools/conf.d/compression.conf ${chroot_dir}/etc/
 
 # Disable terminal ads
 sed -i 's/ENABLED=1/ENABLED=0/g' ${chroot_dir}/etc/default/motd-news
-chroot ${chroot_dir} /bin/bash -c "pro config set apt_news=false"
+#chroot ${chroot_dir} /bin/bash -c "pro config set apt_news=false"
 
 # Remove release upgrade motd
 rm -f ${chroot_dir}/var/lib/ubuntu-release-upgrader/release-upgrade-available
