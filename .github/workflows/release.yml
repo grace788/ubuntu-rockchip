@@ -15,7 +15,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
-        run: gh release create --draft v1.31m3 --title v1.31m3
+        run: gh release create --draft v1.31m4 --title v1.31m4
 
   build:
     permissions:
@@ -68,7 +68,7 @@ jobs:
       - name: Upload release assets
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release upload v1.31m3 ./images/ubuntu-*-preinstalled-*-arm64-${{ matrix.platform }}.*
+        run: gh release upload v1.31m4 ./images/ubuntu-*-preinstalled-*-arm64-${{ matrix.platform }}.*
 
       - name: show linux kernel git url
         shell: bash
